@@ -12,7 +12,7 @@ use Digest::HMAC_SHA1 qw(hmac_sha1);
 use POSIX qw( strftime );
 use base qw(Class::Accessor::Fast);
 __PACKAGE__->mk_accessors(qw(aws_access_key_id secret_access_key empty_image thumb_size ua thumb_store urls));
-our $VERSION = "0.01";
+our $VERSION = "0.02";
 
 sub new {
   my($class, $parms) = @_;
@@ -172,26 +172,26 @@ Net::Amazon::Thumbnail - Use the Amazon Alexa Site Thumbnail web service
 
 use Net::Amazon::Thumbnail;
 
-my %conf = (
-    key_id  => "YoursecretkeyID",
-    access_key  => "Yousecretaccesskey",
-    size    => "Large",
-    path    => "C:/dev/thumbs/",
-    no_image    => "noimage.jpg"
-);
+	my %conf = (
+    	key_id  => "YoursecretkeyID",
+	    access_key  => "Yousecretaccesskey",
+    	size    => "Large",
+	    path    => "C:/dev/thumbs/",
+    	no_image    => "noimage.jpg"
+	);
 
-my $thumb = Net::Amazon::Thumbnail->new(\%conf);
+	my $thumb = Net::Amazon::Thumbnail->new(\%conf);
 
-# Request single thumbnail
-my $images = $thumb->get_thumbnail('.com');
+	# Request single thumbnail
+	my $images = $thumb->get_thumbnail('.com');
 
-# Request multiple thumbnails
-my @domains = ('http://perlmonks.org', 'http://perl.com');
-$images = $thumb->get_thumbnail(\@domains);
+	# Request multiple thumbnails
+	my @domains = ('http://perlmonks.org', 'http://perl.com');
+	$images = $thumb->get_thumbnail(\@domains);
 
-# Request with custom name (when path is provided)
-my %domain = ('perl.com' => 'TheSourceForPerl');
-$images = $thumb->get_thumbnail(\%domain);
+	# Request with custom name (when path is provided)
+	my %domain = ('perl.com' => 'TheSourceForPerl');
+	$images = $thumb->get_thumbnail(\%domain);
 
 =head1 DESCRIPTION
 
@@ -317,11 +317,11 @@ L<http://rt.cpan.org>.
 
 =head1 AUTHOR
 
-Ian Tyndall C<ityndall@ctc.net>
+Ian Tyndall C<ityndall@cpan.org>
 
 =head1 COPYRIGHT                                                    
 
-Copyright (c) 2007, Ian Tyndall C<ityndall@ctc.net>. All rights reserved.           
+Copyright (c) 2007, Ian Tyndall C<ityndall@cpan.org>. All rights reserved.           
                                                                                 
 This module is free software; you can redistribute it and/or                    
 modify it under the same terms as Perl itself.
