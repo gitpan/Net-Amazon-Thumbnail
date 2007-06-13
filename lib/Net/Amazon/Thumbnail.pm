@@ -12,7 +12,7 @@ use Digest::HMAC_SHA1 qw(hmac_sha1);
 use POSIX qw( strftime );
 use base qw(Class::Accessor::Fast);
 __PACKAGE__->mk_accessors(qw(aws_access_key_id secret_access_key empty_image thumb_size ua thumb_store urls));
-our $VERSION = "0.02";
+our $VERSION = "0.03";
 
 sub new {
   my($class, $parms) = @_;
@@ -312,8 +312,9 @@ on Amazon.
 No bugs have been reported.
                                                                                 
 Please report any bugs or feature requests to                                   
-C<bug-<Net-Amazon-AWIS>@rt.cpan.org>, or through the web interface at                   
-L<http://rt.cpan.org>.  
+C<bug-Net-Amazon-Thumbnail@rt.cpan.org>, or through the web interface at                   
+L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Net-Amazon-Thumbnail> is the RT queue
+for Net::Amazon::Thumbnail.  Please check to see if your bug has already been reported. 
 
 =head1 AUTHOR
 
