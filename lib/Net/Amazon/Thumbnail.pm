@@ -11,8 +11,8 @@ use XML::XPath::XMLParser;
 use Digest::HMAC_SHA1 qw(hmac_sha1);
 use POSIX qw( strftime );
 use base qw(Class::Accessor::Fast);
-__PACKAGE__->mk_accessors(qw(aws_access_key_id secret_access_key empty_image thumb_size ua thumb_store urls));
-our $VERSION = "0.03";
+__PACKAGE__->mk_accessors(qw(aws_access_key_id secret_access_key empty_image thumb_size ua thumb_store urls method_type));
+our $VERSION = "0.04";
 
 sub new {
   my($class, $parms) = @_;
@@ -33,17 +33,28 @@ sub new {
   $self->thumb_size(ucfirst($parms->{size}) || 'Large');
   $self->empty_image($parms->{no_image} || 0);
   $self->thumb_store($parms->{path});
+  $self->method_type('GET');
   return $self;
 }
 
 sub get_thumbnail {
   my $self = shift;
   my $url = shift;
-  my $thumb;
   die "No Url given\n" unless($url);
+  $self->method_type('GET') unless($self->method_type eq 'GET');
   my $thumbs = $self->_XML2thumb($self->_request($self->_format_url($url)));
   return $thumbs;
 }
+
+sub post_thumbnail {
+  my $self = shift;
+  my $url = shift;
+  die "No Url given\n" unless($url);
+  $self->method_type('POST') unless($self->method_type eq 'POST');
+  my $thumbs = $self->_XML2thumb($self->_request($self->_format_url($url)));
+  return $thumbs;
+}
+
 
 sub _store {
   my $self = shift;
@@ -134,12 +145,13 @@ sub _request {
 
   my $uri = URI->new($url);
   $uri->query_param($_, $parms->{$_}) foreach keys %$parms;
+
   if($self->{debug}) {
     $xp = XML::XPath->new(xml => $self->{debug});
     return $xp;
   }
   else {
-    $response = $self->ua->get("$uri");
+	$response = ($self->method_type eq 'GET') ? $self->ua->get("$uri") : $self->ua->post("$uri");
     $output = $response->content;
   }
   $xp = XML::XPath->new(xml => $output);
@@ -307,12 +319,19 @@ This method only accepts one argument, which must be a reference.
 If the path option was given, it will return the stored image instead of the image hosted
 on Amazon.
 
+=head2 post_thumbnail
+
+The post_thumbnail is exactly the same as get method, except that it dispatches a C<POST> request
+instead of a C<GET> request.
+
+Although this method does work, the API says to use C<GET> requests.
+
 =head1 BUGS AND LIMITATIONS                                                     
                                                                                 
 No bugs have been reported.
                                                                                 
 Please report any bugs or feature requests to                                   
-C<bug-Net-Amazon-Thumbnail@rt.cpan.org>, or through the web interface at                   
+C<bug-Net-Amazon-Thumbnail@rt.cpan.org>.                   
 L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Net-Amazon-Thumbnail> is the RT queue
 for Net::Amazon::Thumbnail.  Please check to see if your bug has already been reported. 
 
