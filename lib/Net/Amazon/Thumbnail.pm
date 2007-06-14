@@ -12,7 +12,7 @@ use Digest::HMAC_SHA1 qw(hmac_sha1);
 use POSIX qw( strftime );
 use base qw(Class::Accessor::Fast);
 __PACKAGE__->mk_accessors(qw(aws_access_key_id secret_access_key empty_image thumb_size ua thumb_store urls method_type));
-our $VERSION = "0.04";
+our $VERSION = "0.05";
 
 sub new {
   my($class, $parms) = @_;
@@ -186,7 +186,7 @@ use Net::Amazon::Thumbnail;
 
 	my %conf = (
     	key_id  => "YoursecretkeyID",
-	    access_key  => "Yousecretaccesskey",
+	    access_key  => "Yoursecretaccesskey",
     	size    => "Large",
 	    path    => "C:/dev/thumbs/",
     	no_image    => "noimage.jpg"
@@ -253,7 +253,7 @@ The following keys are required:
 
 =item access_key
 
-    access_key  => "Yousecretaccesskey",
+    access_key  => "Yoursecretaccesskey",
 
 =back
 
