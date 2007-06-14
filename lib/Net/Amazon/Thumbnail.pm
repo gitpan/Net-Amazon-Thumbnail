@@ -12,7 +12,7 @@ use Digest::HMAC_SHA1 qw(hmac_sha1);
 use POSIX qw( strftime );
 use base qw(Class::Accessor::Fast);
 __PACKAGE__->mk_accessors(qw(aws_access_key_id secret_access_key empty_image thumb_size ua thumb_store urls method_type));
-our $VERSION = "0.05";
+our $VERSION = "0.06";
 
 sub new {
   my($class, $parms) = @_;
@@ -195,7 +195,7 @@ use Net::Amazon::Thumbnail;
 	my $thumb = Net::Amazon::Thumbnail->new(\%conf);
 
 	# Request single thumbnail
-	my $images = $thumb->get_thumbnail('.com');
+	my $images = $thumb->get_thumbnail('amazon.com');
 
 	# Request multiple thumbnails
 	my @domains = ('http://perlmonks.org', 'http://perl.com');

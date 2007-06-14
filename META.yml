@@ -1,6 +1,6 @@
 ---
 name: Net-Amazon-Thumbnail
-version: 0.05
+version: 0.06
 author:
   - 'Ian Tyndall C<ityndall@cpan.org>'
 abstract: Use the Amazon Alexa Site Thumbnail web service
@@ -24,6 +24,6 @@ meta-spec:
 provides:
   Net::Amazon::Thumbnail:
     file: lib/Net/Amazon/Thumbnail.pm
-    version: 0.05
+    version: 0.06
 resources:
   license: http://dev.perl.org/licenses/
